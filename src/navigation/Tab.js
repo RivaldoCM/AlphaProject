@@ -1,16 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Home } from "../pages/Home";
+import { Record } from "../pages/Record";
+
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { Home } from "./pages/Home";
-import { Record } from "./pages/Record";
-import { Login } from "./pages/Login";
-
-import { createStackNavigator } from "@react-navigation/stack";
-
-const Tab = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator();
 
 const icons = {
     Home: {
@@ -23,13 +20,9 @@ const icons = {
     }
 };
 
-
-
-const Stack = createStackNavigator();
-
-export function MainRoutes(){
+export function Tab(){
     return(
-        <Stack.Navigator
+        <Tabs.Navigator
             screenOptions={ ({ route,  }) => ({
                 headerShown: false,
                 StackBarIcon: ({ color, size }) => {
@@ -41,8 +34,8 @@ export function MainRoutes(){
                 }
             })}
         >
-            <Stack.Screen name="Home" component={Login} />
-            <Stack.Screen name="Registrar" component={Record} /> 
-        </Stack.Navigator>
+            <Tabs.Screen name="Home" component={Home} />
+            <Tabs.Screen name="Registrar" component={Record} /> 
+        </Tabs.Navigator>
     )
 }

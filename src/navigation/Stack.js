@@ -1,29 +1,9 @@
-import React from "react";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import Feather from 'react-native-vector-icons/Feather';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-import { Home } from "./pages/Home";
-import { Record } from "./pages/Record";
-import { Login } from "./pages/Login";
-
 import { createStackNavigator } from "@react-navigation/stack";
+import 'react-native-gesture-handler';
 
-const Tab = createBottomTabNavigator();
-
-const icons = {
-    Home: {
-        name: 'home',
-        library: 'Feather'
-    },
-    Registrar: {
-        name: 'add-chart',
-        library: 'MaterialIcons'
-    }
-};
-
-
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { Tab } from "./Tab";
 
 const Stack = createStackNavigator();
 
@@ -41,8 +21,8 @@ export function MainRoutes(){
                 }
             })}
         >
-            <Stack.Screen name="Home" component={Login} />
-            <Stack.Screen name="Registrar" component={Record} /> 
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Tab" component={Tab} />
         </Stack.Navigator>
     )
 }
