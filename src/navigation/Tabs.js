@@ -7,7 +7,7 @@ import { Record } from "../pages/Record";
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const Tabs = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const icons = {
     Home: {
@@ -20,12 +20,12 @@ const icons = {
     }
 };
 
-export function Tab(){
+export function Tabs(){
     return(
-        <Tabs.Navigator
-            screenOptions={ ({ route,  }) => ({
+        <Tab.Navigator
+            screenOptions={ ({ route }) => ({
                 headerShown: false,
-                StackBarIcon: ({ color, size }) => {
+                tabBarIcon: ({ color, size }) => {
                     const { name, library } = icons[route.name];
                     if(library == 'MaterialIcons'){
                         return <MaterialIcons name={name} color={color} size={size} />
@@ -34,8 +34,8 @@ export function Tab(){
                 }
             })}
         >
-            <Tabs.Screen name="Home" component={Home} />
-            <Tabs.Screen name="Registrar" component={Record} /> 
-        </Tabs.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Registrar" component={Record} /> 
+        </Tab.Navigator>
     )
 }

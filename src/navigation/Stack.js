@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { Tab } from "./Tab";
+import { Tabs } from "./Tabs";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +22,7 @@ export function MainRoutes(){
             })}
         >
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Tab" component={Tab} />
+            <Stack.Screen name="Tabs" component={Tabs} />
         </Stack.Navigator>
     )
 }

@@ -4,14 +4,13 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 export function Login({ navigation }){
 
     const entrar = () => {
-        navigation.navigate("Tab");
+        navigation.navigate("Tabs");
     }
 
     return(
         <View>
-            <Text>Loginnnnnnnnnnnnnnnnnn</Text>
             <TouchableOpacity onPress={entrar}>
-                <Text>Login</Text>
+                <Text>Clique para logar</Text>
             </TouchableOpacity>
         </View>
     )
