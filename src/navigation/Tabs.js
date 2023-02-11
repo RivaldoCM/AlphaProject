@@ -1,11 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Home } from "../pages/Home";
+import { Record } from "../pages/Record";
+
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-import { Home } from "./pages/Home";
-import { Record } from "./pages/Record";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,10 +20,10 @@ const icons = {
     }
 };
 
-export function MainRoutes(){
+export function Tabs(){
     return(
-        <Tab.Navigator 
-            screenOptions={ ({ route,  }) => ({
+        <Tab.Navigator
+            screenOptions={ ({ route }) => ({
                 headerShown: false,
                 tabBarIcon: ({ color, size }) => {
                     const { name, library } = icons[route.name];
