@@ -11,7 +11,7 @@ export const BoxImage = styled.View`
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #A66CFF;
+    background: #00008B;
 `
 
 export const Image = styled.Image`
@@ -23,7 +23,7 @@ export const BoxVoid = styled.View`
     flex: 2;
     align-items: center;
     width: 100%;
-    background-color: #9C9EFE;
+    background-color: #D3D3D3; 
 `
 
 export const BoxForm = styled.View`
@@ -32,7 +32,8 @@ export const BoxForm = styled.View`
     align-items: center;
     position: absolute;
     top: -50px;
-    width: 80%;
+    width: 70%;
     height: 90%;
-    background-color: #AFB4FF;
+    border-radius: 30px;
+    background-color: #f7f7f7;
 `

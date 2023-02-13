@@ -29,9 +29,7 @@ export function Login({ navigation }){
                         <Text>Login</Text>
                     </TouchableOpacity>
                 </BoxForm>
-
             </BoxVoid>
-
         </Container>
     )
 }
