@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import { Container } from "./style";
 
 export function Login({ navigation }){
 
@@ -8,10 +9,10 @@ export function Login({ navigation }){
     }
 
     return(
-        <View>
+        <Container>
             <TouchableOpacity onPress={entrar}>
                 <Text>Clique para logar</Text>
             </TouchableOpacity>
-        </View>
+        </Container>
     )
 }

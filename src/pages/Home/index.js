@@ -1,10 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, Text,  } from "react-native";
+import { Container } from "./style";
+
 
 export function Home(){
     return(
-        <View>
+        <Container>
             <Text>Home</Text>
-        </View>
+            <TouchableOpacity>
+                <Text>MUDA COR</Text>
+            </TouchableOpacity>
+        </Container>
     )
 }
