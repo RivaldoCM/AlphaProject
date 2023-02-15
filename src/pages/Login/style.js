@@ -4,36 +4,69 @@ export const Container = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
+    background-color: #f4eef3;
 `
 
-export const BoxImage = styled.View`
+export const BoxText = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: #00008B;
-`
-
-export const Image = styled.Image`
-    width: 350px;
-    height: 180px;
-`
-
-export const BoxVoid = styled.View`
-    flex: 2;
-    align-items: center;
-    width: 100%;
-    background-color: #D3D3D3; 
 `
 
 export const BoxForm = styled.View`
-    flex: 1;
+    flex: 1.5;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: -50px;
-    width: 70%;
-    height: 90%;
+    width: 100%;
     border-radius: 30px;
-    background-color: #f7f7f7;
 `
+
+export const TextInput = styled.TextInput.attrs({
+    placeholderTextColor: "#a7a6b1",
+})`
+    width: 80%;
+    height: 65px;
+    margin: 5px;
+    border-radius: 15px;
+    color: black;
+    background-color: #FFFFFF;
+
+`;
+
+export const BoxChangePass = styled.View`
+    width: 80%;
+    align-items: flex-end;
+`
+
+export const ButtonChangePass = styled.TouchableOpacity`
+    width: 140px;
+    height: 20px;
+    margin: 5px 0 12px 0;
+
+`
+
+export const ButtonLogin = styled.TouchableOpacity`
+    justify-content: center;
+    align-items: center;
+    background-color: #f26969;
+    width: 80%;
+    height: 60px;
+    border-radius: 10px;
+`
+export const BoxSocial = styled.View`
+    flex: 1.5;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+`
+
+export const ButtonAuth = styled.TouchableOpacity`
+    width: 75px;
+    height: 60px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+`
+
+

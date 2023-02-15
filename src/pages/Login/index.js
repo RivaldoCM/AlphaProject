@@ -1,14 +1,17 @@
 import React from "react";
-import { Text, TouchableOpacity, TextInput } from "react-native";
+import { Text, StyleSheet } from "react-native";
 
 import { 
     BoxForm, 
-    BoxImage, 
-    BoxVoid, 
-    Container, 
-    Image } from "./style";
-
-import logo from '../../images/logo.png'
+    BoxText, 
+    BoxSocial, 
+    Container,
+    TextInput,
+    ButtonLogin ,
+    ButtonChangePass,
+    BoxChangePass,
+    ButtonAuth
+} from "./style";
 
 export function Login({ navigation }){
 
@@ -18,18 +21,33 @@ export function Login({ navigation }){
 
     return(
         <Container>
-            <BoxImage>
-                <Image source={logo} />
-            </BoxImage>
-            <BoxVoid>
-                <BoxForm>
-                    <TextInput placeholder="Email:"/>
-                    <TextInput placeholder="Senha:"/>
-                    <TouchableOpacity onPress={entrar}>
+            <BoxText>
+
+            </BoxText>
+            <BoxForm>
+                    <TextInput placeholder="Email: "/>
+                    <TextInput placeholder="Senha: "/>
+                    <BoxChangePass>
+                        <ButtonChangePass>
+                            <Text>Esqueceu sua senha?</Text>
+                        </ButtonChangePass>
+                    </BoxChangePass>
+                    <ButtonLogin onPress={entrar}>
                         <Text>Login</Text>
-                    </TouchableOpacity>
+                    </ButtonLogin>
                 </BoxForm>
-            </BoxVoid>
+            <BoxSocial>
+                <ButtonAuth>
+
+                </ButtonAuth>
+                <ButtonAuth>
+                    
+                </ButtonAuth>
+                <ButtonAuth>
+                    
+                </ButtonAuth>
+            </BoxSocial>
         </Container>
     )
 }
+
