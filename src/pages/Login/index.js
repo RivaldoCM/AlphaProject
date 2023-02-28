@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 
-import db from "../../api/databaseConnection";
+import firebase from "../../api/databaseConnection";
 
 import { 
     BoxForm, 
@@ -19,6 +19,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from "react-native";
+import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
 
 
 export function Login({ navigation }){
@@ -30,25 +31,24 @@ export function Login({ navigation }){
 
     }, []);
 
+
     const login = () => {
-        db.auth().signInWithEmailAndPassword(auth, email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
 
         const user = userCredential.user;
             console.log(user);
+            console.log('deu certo');
+            navigation.navigate("Tabs");
     })
         .catch((error) => {
             setError(true);
             const errorCode = error.code;
             const errorMessage = error.message;
+            console.log(error)
         });
     }
-
-
-    const entrar = () => {
-        navigation.navigate("Tabs");
-    }
-
+    
     return(
         <Container>
             <BoxText>
@@ -73,7 +73,7 @@ export function Login({ navigation }){
                         <Text>Esqueceu sua senha?</Text>
                     </ButtonChangePass>
                 </BoxChangePass>
-                <ButtonLogin onPress={entrar}>
+                <ButtonLogin onPress={login}>
                     <Text>Login</Text>
                 </ButtonLogin>
             </BoxForm>

@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import 'react-native-gesture-handler';
 
-import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Tabs } from "./Tabs";
 

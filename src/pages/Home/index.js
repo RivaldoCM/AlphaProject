@@ -1,24 +1,25 @@
 import { collection, onSnapshot, query, QuerySnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity, TextComponent } from "react-native";
 import firebase from "../../api/databaseConnection";
 
 
-export function Home(){
+export function Home({ navigation }){
     const [name, setName] = useState('');
 
-    useEffect(() => {
-        const q = query(collection(firebase, "users"));
-        onSnapshot(q, (querySnapshot) => {
-            setName(querySnapshot.docs.map( doc =>({
-                data: doc.data()
-            })))
+    function logout() {
+        firebase.auth().signOut().then(() => {
+            navigation.navigate("Login");
+        }).catch((error) => {
+            
         })
-    }, []);
-    
+    }
+
     return(
         <View>
-            <Text>{name[0]?.data?.senha}</Text>
+            <TouchableOpacity onPress={() => logout() }>
+                <Text>DESLOGAR</Text>
+            </TouchableOpacity>
         </View>
     )
 }
