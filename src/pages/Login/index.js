@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
 
 import { 
     BoxForm, 
@@ -12,34 +12,51 @@ import {
     BoxChangePass,
     ButtonAuth,
     BoxDivisor,
-    ButtonsContent
+    ButtonsContent,
+    SetPassword,
+    BoxError
 } from "./style";
 
 import logo from '../../assets/images/logo.png'
 import facebookLogo from '../../assets/icons/facebook-logo.png';
 import googleLogo from '../../assets/icons/google-logo.png';
 
+import Feather from 'react-native-vector-icons/Feather';
+
 
 export function Login({ navigation }){
-
-    const entrar = () => {
-        navigation.navigate("Tabs");
-    }
+    const [showPassoword, setShowPassword] = useState(false);
 
     return(
         <Container>
             <BoxText>
-                <Image source={logo} style={{ resizeMode: 'center', height: 250 }}/>
+                <Image source={logo} style={{ resizeMode: 'center', height: 250 }} />
             </BoxText>
             <BoxForm>
                 <TextInput placeholder="Digite seu Email "/>
-                <TextInput placeholder="Digite sua senha "/>
+                <SetPassword>
+                    <TextInput
+                        secureTextEntry={showPassoword} 
+                        placeholder="Digite sua senha "
+                    />
+                    <TouchableWithoutFeedback onPress={() => setShowPassword(!showPassoword)}>
+                        {   
+                            showPassoword === true 
+                            ? <Feather name="eye" size={20}/> 
+                            : <Feather name="eye-off" size={20}/>
+                        }
+                    </TouchableWithoutFeedback>
+                </SetPassword>
                 <BoxChangePass>
                     <ButtonChangePass>
                         <Text>Esqueceu sua senha?</Text>
                     </ButtonChangePass>
                 </BoxChangePass>
-                <ButtonLogin onPress={entrar}>
+                <BoxError>
+                    <Feather name="alert-circle" size={25} />
+                    <Text style={{ color: '#363636' }}> Login ou senha estao errados</Text>
+                </BoxError>
+                <ButtonLogin>
                     <Text style={{ color: '#fee7e7' }} >Login</Text>
                 </ButtonLogin>
             </BoxForm>

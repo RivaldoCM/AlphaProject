@@ -22,6 +22,15 @@ export const BoxForm = styled.View`
     border-radius: 30px;
 `;
 
+export const SetPassword = styled.View`
+    width: 80%;
+    height: 65px;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #ffffff;
+`
+
 export const TextInput = styled.TextInput.attrs({
     placeholderTextColor: "#a7a6b1",
 
@@ -45,6 +54,16 @@ export const ButtonChangePass = styled.TouchableOpacity`
     height: 20px;
     margin: 5px 0 12px 0;
 `;
+
+export const BoxError = styled.View`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 40px;
+    margin: 5px 0;
+    background-color: #DCDCDC;
+`
 
 export const ButtonLogin = styled.TouchableOpacity`
     justify-content: center;
