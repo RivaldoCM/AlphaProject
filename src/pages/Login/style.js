@@ -28,6 +28,7 @@ export const TextInput = styled.TextInput.attrs({
 })`
     width: 80%;
     height: 65px;
+    padding-left: 15px;
     margin: 5px;
     border-radius: 15px;
     color: black;

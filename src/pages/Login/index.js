@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, TouchableOpacity, Image } from "react-native";
 
 import { 
     BoxForm, 
@@ -15,8 +15,9 @@ import {
     ButtonsContent
 } from "./style";
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import { TouchableOpacity } from "react-native";
+import logo from '../../assets/images/logo.png'
+import facebookLogo from '../../assets/icons/facebook-logo.png';
+import googleLogo from '../../assets/icons/google-logo.png';
 
 
 export function Login({ navigation }){
@@ -28,18 +29,18 @@ export function Login({ navigation }){
     return(
         <Container>
             <BoxText>
-
+                <Image source={logo} style={{ resizeMode: 'center', height: 250 }}/>
             </BoxText>
             <BoxForm>
-                <TextInput placeholder="Email: "/>
-                <TextInput placeholder="Senha: "/>
+                <TextInput placeholder="Digite seu Email "/>
+                <TextInput placeholder="Digite sua senha "/>
                 <BoxChangePass>
                     <ButtonChangePass>
                         <Text>Esqueceu sua senha?</Text>
                     </ButtonChangePass>
                 </BoxChangePass>
                 <ButtonLogin onPress={entrar}>
-                    <Text>Login</Text>
+                    <Text style={{ color: '#fee7e7' }} >Login</Text>
                 </ButtonLogin>
             </BoxForm>
             <BoxSocial>
@@ -48,19 +49,16 @@ export function Login({ navigation }){
                 </BoxDivisor>
                 <ButtonsContent>
                     <ButtonAuth>
-                        <Icon name="logo-facebook" size={35} color='#1a78f1' borderRadius={5} />
+                        <Image source={googleLogo}/>
                     </ButtonAuth>
                     <ButtonAuth>
-                        <Icon name="logo-apple" size={35} color='#38393b'/>
-                    </ButtonAuth>
-                    <ButtonAuth>
-                        <Icon name="logo-google" size={35} color='#e24136'/>
+                        <Image source={facebookLogo}/>
                     </ButtonAuth>
                 </ButtonsContent>
                 <BoxDivisor>
                     <Text style={{ color: 'black' }}>Ainda nao é membro? </Text>
                     <TouchableOpacity>
-                        <Text style={{ color: 'black' }}>Registre-se</Text>
+                        <Text style={{ color: '#6091cf' }}>Registre-se</Text>
                     </TouchableOpacity>
                 </BoxDivisor>
             </BoxSocial>
