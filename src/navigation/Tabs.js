@@ -6,6 +6,7 @@ import { Record } from "../pages/Record";
 
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Settings } from "../pages/Settings";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +18,10 @@ const icons = {
     Registrar: {
         name: 'add-chart',
         library: 'MaterialIcons'
+    },
+    Mais: {
+        name: 'more-horizontal',
+        library: 'Feather'
     }
 };
 
@@ -35,7 +40,8 @@ export function Tabs(){
             })}
         >
             <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Registrar" component={Record} /> 
+            <Tab.Screen name="Registrar" component={Record} />
+            <Tab.Screen name="Mais" component={Settings} /> 
         </Tab.Navigator>
     )
 }
