@@ -1,4 +1,3 @@
-import { collection, onSnapshot, query, QuerySnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, TextComponent } from "react-native";
 import firebase from "../../api/databaseConnection";
