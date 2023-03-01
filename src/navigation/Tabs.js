@@ -1,12 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Home } from "../pages/Home";
-import { Record } from "../pages/Record";
+import { Home } from "../screens/Home";
+import { Record } from "../screens/Record";
 
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Settings } from "../pages/Settings";
+import { Settings } from "../screens/Settings";
 
 const Tab = createBottomTabNavigator();
 

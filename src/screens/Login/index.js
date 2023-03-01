@@ -7,8 +7,13 @@ export function Login({ navigation }){
         navigation.navigate("Tabs");
     }
 
+
+
     return(
         <View>
+            <TouchableOpacity onPress={() => navigation.navigate("Register") }>
+                <Text>Registre-se</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={entrar}>
                 <Text>Clique para logar</Text>
             </TouchableOpacity>
