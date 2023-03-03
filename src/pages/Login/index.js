@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
+import { View, Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
 
 import firebase from "../../api/databaseConnection";
 
@@ -23,7 +23,6 @@ import logo from '../../assets/images/logo.png'
 import facebookLogo from '../../assets/icons/facebook-logo.png';
 import googleLogo from '../../assets/icons/google-logo.png';
 import Feather from 'react-native-vector-icons/Feather';
-import { View } from "react-native";
 
 
 export function Login({ navigation }){
@@ -35,18 +34,22 @@ export function Login({ navigation }){
     const provider = new firebase.auth.GoogleAuthProvider();
 
     const login = () => {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
 
-        const user = userCredential.user;
-        console.log(user);
-        navigation.navigate("Tabs");
-    })
-        .catch((error) => {
+        if (email === '' || password === ''){
             setError(true);
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
+        }else{
+            firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+    
+            const user = userCredential.user;
+            navigation.navigate("Tabs");
+        })
+            .catch((error) => {
+                setError(true);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+        }
     }
 
     const googleLogin = () => {
@@ -63,7 +66,7 @@ export function Login({ navigation }){
             </BoxText>
             <BoxForm>
                 <TextInput 
-                    placeholder="Digite seu Email "
+                    placeholder="Digite seu E-mail "
                     type="text"
                     onChangeText={(text) => setEmail(text)}
                     value={email}
@@ -97,9 +100,8 @@ export function Login({ navigation }){
                             <Text style={{ color: '#363636' }}> Email ou senha estão incorretos</Text>
                         </BoxError>
                     : 
-                        <View />
+                        <View style={{ height: 40 }}/>
                 }
-
                 <ButtonLogin onPress={login}>
                     <Text style={{ color: '#fee7e7' }}>Login</Text>
                 </ButtonLogin>
