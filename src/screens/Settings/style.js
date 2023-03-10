@@ -6,9 +6,17 @@ export const Profile = styled.View`
 `;
 
 export const BoxImage = styled.View`
+    justify-content: center;
+    align-items: center;
     width: 30%;
     height: 100%;
-    background-color: aliceblue;
+`;
+
+export const ImageContent = styled.View`
+    width: 70%;
+    height: 70%;
+    border-radius: 50px;
+    background-color: grey;
 `;
 
 export const BoxInfos = styled.View`

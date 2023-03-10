@@ -1,9 +1,19 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
-import { Profile, BoxImage, BoxInfos, Button, BoxIcon, BoxText } from "./style";
+import { 
+    Profile, 
+    BoxImage, 
+    BoxInfos, 
+    Button, 
+    BoxIcon, 
+    BoxText, 
+    ImageContent
+    }
+from "./style";
 
 import Icon from "react-native-vector-icons/Feather";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export function Settings(){
     return(
@@ -12,7 +22,9 @@ export function Settings(){
                 <TouchableOpacity>
                     <Profile>
                         <BoxImage>
+                            <ImageContent>
 
+                            </ImageContent>
                         </BoxImage>
                         <BoxInfos>
                             <Text>Rivaldo</Text>
@@ -39,7 +51,10 @@ export function Settings(){
                     </Button>
                     <Button>
                         <BoxIcon>
-                            <Icon name="lock" size={20} />
+                            <Ionicons 
+                                name="color-palette-outline" 
+                                size={25} 
+                            />
                         </BoxIcon>
                         <Text>Temas</Text>
                     </Button>
