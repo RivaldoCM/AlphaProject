@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 
 
 import { Login } from "../screens/Login";
-import { Register } from "../screens/newUser";
+import { Register } from "../screens/Register";
 import { Tabs } from "./Tabs";
 
 const Stack = createStackNavigator();
