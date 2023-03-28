@@ -40,14 +40,17 @@ export function Settings(){
                         </BoxIcon>
                         <BoxText>
                             <Text>Conta</Text>
-                            <Text>Conta</Text>
+                            <Text>Troque a sua senha e configure sua conta aqui</Text>
                         </BoxText>
                     </Button>
                     <Button>
                         <BoxIcon>
                             <Icon name="shield" size={20} />
                         </BoxIcon>
-                        <Text>Privacidade</Text>
+                        <BoxText>
+                            <Text>Privacidade</Text>
+                            <Text>Defina privacidades e preferências de acordo com você</Text>
+                        </BoxText>
                     </Button>
                     <Button>
                         <BoxIcon>
@@ -56,7 +59,10 @@ export function Settings(){
                                 size={25} 
                             />
                         </BoxIcon>
-                        <Text>Temas</Text>
+                        <BoxText>
+                            <Text>Temas</Text>
+                            <Text>Escolha o tema que mais combinar com você</Text>
+                        </BoxText>
                     </Button>
                     <Button>
                         <BoxIcon>
