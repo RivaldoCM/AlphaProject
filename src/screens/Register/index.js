@@ -23,7 +23,7 @@ export function Register(props){
                         </View>
                     </BoxInput>
                 </Container>
-                <ContainerTwo>
+                <Container flexDirection>
                     <Container>
                         <View>
                             <Text>Nome</Text>
@@ -50,7 +50,7 @@ export function Register(props){
                             </View>
                         </BoxInput>
                     </Container>
-                </ContainerTwo>
+                </Container>
             </Form>
         </View>
     )

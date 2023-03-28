@@ -6,7 +6,9 @@ export const Form = styled.View`
 `;
 
 export const Container = styled.View`
-    width: 100%;
+    display: flex;
+    flex-direction: ${(props) => (props.flexDirection ? "row" : "column")};
+    width: ${(props) => (props.flexDirection ? "50%" : "100%")};
 `;
 
 export const BoxIcon = styled.View`
@@ -20,9 +22,4 @@ export const BoxInput = styled.View`
     margin: 10px 10px 10px 0;
     border: 1px solid black;
     border-radius: 10px;
-`;
-
-export const ContainerTwo = styled.View`
-    flex-direction: row;
-    width: 50%;
 `;
