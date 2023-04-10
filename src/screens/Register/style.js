@@ -6,7 +6,6 @@ export const Form = styled.View`
 `;
 
 export const Container = styled.View`
-    display: flex;
     flex-direction: ${(props) => (props.flexDirection ? "row" : "column")};
     width: ${(props) => (props.flexDirection ? "50%" : "100%")};
 `;
