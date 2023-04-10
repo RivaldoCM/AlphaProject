@@ -1,5 +1,8 @@
-import { initializeApp } from 'firebase/app';
-import { initializeFirestore } from 'firebase/firestore';
+import firebase from'firebase/compat/app';
+import 'firebase/storage';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBz7q5VQWNWvgA2jaYnpt7rF-ijxi-DI1Q",
@@ -12,12 +15,9 @@ const firebaseConfig = {
     measurementId: "G-1FGKLRT09B"
 };
 
+const app = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
 
 
-const app = initializeApp(firebaseConfig);
-
-const db =  initializeFirestore(app, {
-    experimentalForceLongPolling: true,
-});
-
-export default db;
+export default firebase;
