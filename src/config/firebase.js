@@ -1,7 +1,6 @@
-import firebase from'firebase/compat/app';
-import 'firebase/storage';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { initializeFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -15,9 +14,10 @@ const firebaseConfig = {
     measurementId: "G-1FGKLRT09B"
 };
 
-const app = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
-
-export default firebase;
+// UPDATE METHOD FOR AVOID CONNECTION FIRESTORE PROBLEMS
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true
+});

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
 
-import firebase from "../../api/databaseConnection";
+import { auth } from "../../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { 
     BoxForm, 
@@ -24,30 +25,34 @@ import facebookLogo from '../../assets/icons/facebook-logo.png';
 import googleLogo from '../../assets/icons/google-logo.png';
 import Feather from 'react-native-vector-icons/Feather';
 
-
 export function Login({ navigation }){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassoword, setShowPassword] = useState(false);
     const [error, setError] = useState(false);
 
-    const provider = new firebase.auth.GoogleAuthProvider();
+    //component will unmount in 5 seg
+    useEffect(()=> {
+        setTimeout(() => {
+            setError(false);
+        }, 5000);
+    }, [error]);
 
     const login = () => {
 
         if (email === '' || password === ''){
             setError(true);
         }else{
-            firebase.auth().signInWithEmailAndPassword(email, password)
+            signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
     
-            const user = userCredential.user;
+            const user = userCredential.user; //userData
             navigation.navigate("Tabs");
         })
-            .catch((error) => {
+            .catch((err) => {
                 setError(true);
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                const errorCode = err.code;
+                const errorMessage = err.message;
             });
         }
     }
@@ -81,7 +86,7 @@ export function Login({ navigation }){
                     />
                     <TouchableWithoutFeedback onPress={() => setShowPassword(!showPassoword)}>
                         {   
-                            showPassoword === true 
+                            showPassoword === true
                             ? <Feather name="eye" size={20}/> 
                             : <Feather name="eye-off" size={20}/>
                         }
