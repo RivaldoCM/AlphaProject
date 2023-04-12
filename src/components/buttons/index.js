@@ -3,10 +3,10 @@ import { Text } from "react-native";
 
 import { LoginButton } from "./style"
 
-export function LoginBtn(props){
+export function LoginBtn({text, onPress}){
     return(
-        <LoginButton>
-            <Text style={{ color: '#fee7e7' }} >{props.text}</Text>
+        <LoginButton onPress={onPress}>
+            <Text style={{ color: '#fee7e7' }} >{text}</Text>
         </LoginButton>
     )
 }

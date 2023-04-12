@@ -54,15 +54,7 @@ export const ButtonChangePass = styled.TouchableOpacity`
     margin: 5px 0 12px 0;
 `;
 
-export const BoxError = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    height: 40px;
-    margin: 5px 0;
-    background-color: #DCDCDC;
-`
+
 
 export const BoxSocial = styled.View`
     flex: 1.5;

@@ -1,10 +1,14 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, TextComponent } from "react-native";
 
-export function Home(){
+export function Home({ navigation }){
+    const [name, setName] = useState('');
+
     return(
         <View>
-            <Text>Home</Text>
+            <TouchableOpacity>
+                <Text>DESLOGAR</Text>
+            </TouchableOpacity>
         </View>
     )
 }
