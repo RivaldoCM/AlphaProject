@@ -7,7 +7,6 @@ import {
     BoxSocial, 
     Container,
     TextInput,
-    ButtonLogin ,
     ButtonChangePass,
     BoxChangePass,
     ButtonAuth,
@@ -16,6 +15,8 @@ import {
     SetPassword,
     BoxError
 } from "./style";
+
+import { LoginBtn } from "../../components/buttons";
 
 import logo from '../../assets/images/logo.png'
 import facebookLogo from '../../assets/icons/facebook-logo.png';
@@ -33,7 +34,7 @@ export function Login({ navigation }){
                 <Image source={logo} style={{ resizeMode: 'center', height: 250 }} />
             </BoxText>
             <BoxForm>
-                <TextInput placeholder="Digite seu Email "/>
+                <TextInput placeholder="Digite seu e-mail "/>
                 <SetPassword>
                     <TextInput
                         secureTextEntry={showPassoword} 
@@ -56,9 +57,7 @@ export function Login({ navigation }){
                     <Feather name="alert-circle" size={25} />
                     <Text style={{ color: '#363636' }}> Login ou senha estao errados</Text>
                 </BoxError>
-                <ButtonLogin>
-                    <Text style={{ color: '#fee7e7' }} >Login</Text>
-                </ButtonLogin>
+                <LoginBtn text="Fazer login no aplicativo"/>
             </BoxForm>
             <BoxSocial>
                 <BoxDivisor>

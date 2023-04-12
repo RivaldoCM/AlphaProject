@@ -33,7 +33,6 @@ export const SetPassword = styled.View`
 
 export const TextInput = styled.TextInput.attrs({
     placeholderTextColor: "#a7a6b1",
-
 })`
     width: 80%;
     height: 65px;
@@ -64,15 +63,6 @@ export const BoxError = styled.View`
     margin: 5px 0;
     background-color: #DCDCDC;
 `
-
-export const ButtonLogin = styled.TouchableOpacity`
-    justify-content: center;
-    align-items: center;
-    background-color: #f26969;
-    width: 80%;
-    height: 60px;
-    border-radius: 10px;
-`;
 
 export const BoxSocial = styled.View`
     flex: 1.5;
