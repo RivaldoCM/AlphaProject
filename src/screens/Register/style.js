@@ -18,7 +18,13 @@ export const BoxIcon = styled.View`
 export const BoxInput = styled.View`
     flex-direction: row;
     align-items: center;
-    margin: 10px 10px 10px 0;
-    border: 1px solid black;
+    margin: 0 10px 5px 0;
+    border-bottom-width: 1px;
+    border-color: #CCCCCC;
+    border-style: solid;
     border-radius: 10px;
+`;
+
+export const TextInput = styled.TextInput`
+    width:  ${(props) => (props.width ? "70%" : "85%")};
 `;
