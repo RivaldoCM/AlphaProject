@@ -1,9 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Home } from "../screens/Home";
-import { Record } from "../screens/Record";
-
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Settings } from "../screens/Settings";
@@ -39,8 +36,6 @@ export function Tabs(){
                 }
             })}
         >
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Registrar" component={Record} />
             <Tab.Screen name="Mais" component={Settings} /> 
         </Tab.Navigator>
     )
