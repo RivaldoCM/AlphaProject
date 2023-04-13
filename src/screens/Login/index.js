@@ -43,12 +43,11 @@ export function Login({ navigation }){
 
         if (email === '' || password === ''){
             setError(true);
-            console.log(error)
         }else{
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
     
-            const user = userCredential.user; //userData
+            //const user = userCredential.user; userData
             navigation.navigate("Tabs");
         })
             .catch((err) => {
@@ -73,7 +72,7 @@ export function Login({ navigation }){
             </BoxText>
             <BoxForm>
                 <TextInput 
-                    placeholder="Digite seu E-mail "
+                    placeholder="Digite seu E-mail"
                     type="text"
                     onChangeText={(text) => setEmail(text)}
                     value={email}
@@ -122,7 +121,7 @@ export function Login({ navigation }){
                 </ButtonsContent>
                 <BoxDivisor>
                     <Text style={{ color: 'black' }}>Ainda nao é membro? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Register")}>
                         <Text style={{ color: '#6091cf' }}>Registre-se</Text>
                     </TouchableOpacity>
                 </BoxDivisor>

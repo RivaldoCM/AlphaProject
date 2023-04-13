@@ -1,27 +1,27 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import 'react-native-gesture-handler';
 
-import { Login } from "../pages/Login";
+import { Login } from "../screens/Login";
+import { Register } from "../screens/Register";
 import { Tabs } from "./Tabs";
 
 const Stack = createStackNavigator();
 
 export function MainRoutes(){
     return(
-        <Stack.Navigator
-            screenOptions={ ({ route,  }) => ({
-                headerShown: false,
-                StackBarIcon: ({ color, size }) => {
-                    const { name, library } = icons[route.name];
-                    if(library == 'MaterialIcons'){
-                        return <MaterialIcons name={name} color={color} size={size} />
+        <Stack.Navigator>
+            <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+            <Stack.Screen options={{ headerShown: false }} name="Tabs" component={Tabs} />
+            <Stack.Screen
+                options={{
+                    title: 'Cadastro',
+                    headerStyle: {
+                        backgroundColor: 'transparent',
                     }
-                    return <Feather name={name} color={color} size={size} />
-                }
-            })}
-        >
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Tabs" component={Tabs} />
+                }}
+                name="Register" 
+                component={Register} 
+            />
         </Stack.Navigator>
     )
 }

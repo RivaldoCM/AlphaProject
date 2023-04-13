@@ -55,7 +55,6 @@ export const ButtonChangePass = styled.TouchableOpacity`
 `;
 
 
-
 export const BoxSocial = styled.View`
     flex: 1.5;
     justify-content: center;
@@ -87,5 +86,3 @@ export const ButtonAuth = styled.TouchableOpacity`
     border: 2px solid #fff;
     border-radius: 10px;
 `;
-
-
