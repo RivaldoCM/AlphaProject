@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native";
 import { View, Text } from "react-native";
 
 import { TextInputMask } from "react-native-masked-text"; 
 
 import { auth, db } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 
 import { 
     BoxIcon, 
@@ -18,6 +17,11 @@ import {
 from "./style";
 import Icon from "react-native-vector-icons/Feather";
 
+import { LoginBtn } from "../../components/buttons";
+import { ErrorLogin } from "../../components/errors/ErrorLogin";
+
+import { useError } from '../../utils/errors';
+
 export function Register(){
 
     const [email, setEmail] = useState('');
@@ -27,27 +31,48 @@ export function Register(){
     const [userName, setUserName] = useState('');
     const [phoneNumer, setPhoneNumber] = useState('');
 
+    const { error, errorMessage, handleError } = useError();
+
     const userCollectionRef = collection(db, 'users');
-      
+    
     const register = async () => {
-        if(email === '' || password === '' || fisrtname === '' || lastName === '' || userName === ''){
-            console.log('vazio');
-        }else{
-            await createUserWithEmailAndPassword(auth, email, password).then(
-                async (res) => {
-                    try{
-                        await setDoc(doc(userCollectionRef, res.user.uid), {
-                            username: userName,
-                            fullName: fisrtname.concat(' ', lastName),
-                            email: email,
-                        });
-                    } catch(err){
-                        console.log(err);
-                    }
-                }
-            )
+      if (email === '' || password === '' || firstname === '' || lastName === '' || userName === '' || phoneNumer === '') {
+        const error = 'Campo vazio';
+        handleError(error);
+      } else {
+        try {
+            //Cria o usuario e senha no Firebase
+            const userCreds = await createUserWithEmailAndPassword(auth, email, password);
+
+            //Cria um documento com ID do usuário
+            const userDocRef = doc(userCollectionRef, userCreds.user.uid);
+            
+            //Cria a subcoleção "data" onde vai ficar os dados do user
+            const dataCollectionRef = collection(userDocRef, 'data');
+            await setDoc(dataCollectionRef.parent, { 'data': true });
+
+            const userData = {
+                username: userName,
+                fullName: firstname.concat(' ', lastName),
+                email: email,
+                phoneNumber: phoneNumer
+            };
+                // Adiciona os dados do usuário na coleção "data"
+                await addDoc(dataCollectionRef, userData);
+                
+                console.log('Novas credenciais do usuário:', userCreds);
+                console.log('Usuário criado com sucesso:', userCreds.user.uid);
+                return userCreds;
+            } catch (err) {
+                console.log('Erro ao criar usuário:', err);
+                const errorMessage = err.code;
+                handleError(errorMessage);
+                return null;
+            }
         }
     }
+    
+
 
     return(
         <View>
@@ -60,7 +85,8 @@ export function Register(){
                         <BoxIcon>
                             <Icon name="user" size={20} />
                         </BoxIcon>
-                        <TextInput 
+                        <TextInput
+                            placeholder="Escolha um nome de usuário"
                             type="text"
                             onChangeText={(text) => setUserName(text)}
                             value={userName}
@@ -70,7 +96,7 @@ export function Register(){
                     </BoxInput>
                 </Container>
                 <Container flexDirection>
-                    <Container>
+                    <Container width>
                         <View>
                             <Text>Nome</Text>
                         </View>
@@ -95,7 +121,7 @@ export function Register(){
                             <BoxIcon width>
                                 <Icon name="user" size={20} />
                             </BoxIcon>
-                            <TextInput 
+                            <TextInput
                                 width
                                 type="text"
                                 onChangeText={(text) => setLastName(text)}
@@ -107,14 +133,14 @@ export function Register(){
                 </Container>
                 <Container>
                     <View>
-                        <Text>Email</Text>
+                        <Text>E-mail</Text>
                     </View>
                     <BoxInput>
                         <BoxIcon>
                             <Icon name="mail" size={20} />
                         </BoxIcon>
                         <TextInput
-                        
+                            placeholder="Digite seu E-mail"
                             type="text"
                             onChangeText={(text) => setEmail(text)}
                             value={email}
@@ -123,47 +149,53 @@ export function Register(){
                     </BoxInput>
                 </Container>
                 <Container>
-                        <View>
-                            <Text>Senha</Text>
-                        </View>
-                        <BoxInput>
-                            <BoxIcon>
-                                <Icon name="lock" size={20} />
-                            </BoxIcon>
-                                <TextInput
-                                    placeholder="Digite sua senha"
-                                    type="text"
-                                    onChangeText={(text) => setPassoword(text)}
-                                    value={password}
-                                >
-                                </TextInput>
-                        </BoxInput>
-                    </Container>
-                    <Container>
-                        <View>
-                            <Text>Número de telefone</Text>
-                        </View>
-                        <BoxInput>
-                            <BoxIcon>
-                                <Icon name="phone" size={20} />
-                            </BoxIcon>
-                            <TextInputMask
-                                style={{ width: 250 }}
-                                type={'cel-phone'}
-                                options={{
-                                    maskType: 'BRL',
-                                    withDDD: true,
-                                    dddMask: '(99) '
-                                }}
-                                onChangeText={(text) => setPhoneNumber(text)}
-                                value={phoneNumer}
+                    <View>
+                        <Text>Senha</Text>
+                    </View>
+                    <BoxInput>
+                        <BoxIcon>
+                            <Icon name="lock" size={20} />
+                        </BoxIcon>
+                            <TextInput
+                                placeholder="Digite sua senha"
+                                type="text"
+                                onChangeText={(text) => setPassoword(text)}
+                                value={password}
                             >
-                            </TextInputMask>
-                        </BoxInput>
-                    </Container>
-                <TouchableOpacity onPress={register}>
-                    <Text>Criar conta</Text>
-                </TouchableOpacity>
+                            </TextInput>
+                    </BoxInput>
+                </Container>
+                <Container>
+                    <View>
+                        <Text>Número de telefone</Text>
+                    </View>
+                    <BoxInput>
+                        <BoxIcon>
+                            <Icon name="phone" size={20} />
+                        </BoxIcon>
+                        <TextInputMask
+                            placeholder="(  ) _ _ _ _ - _ _ _ _"
+                            style={{ width: 250 }}
+                            type={'cel-phone'}
+                            options={{
+                                maskType: 'BRL',
+                                withDDD: true,
+                                dddMask: '(99) '
+                            }}
+                            onChangeText={(text) => setPhoneNumber(text)}
+                            value={phoneNumer}
+                        >
+                        </TextInputMask>
+                    </BoxInput>
+                </Container>
+                <LoginBtn text='Criar conta' onPress={register}/>
+                {
+                    error === true
+                    ?
+                        <ErrorLogin text={errorMessage}/>
+                    :
+                        <View />                    
+                }
             </Form>
         </View>
     )

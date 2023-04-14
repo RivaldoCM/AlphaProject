@@ -7,14 +7,14 @@ export const Container = styled.View`
     background-color: #f4eef3;
 `;
 
-export const BoxText = styled.View`
+export const BoxImage = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
     width: 100%;
 `;
 
-export const BoxForm = styled.View`
+export const Form = styled.View`
     flex: 1.5;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,6 @@ export const ButtonChangePass = styled.TouchableOpacity`
     margin: 5px 0 12px 0;
 `;
 
-
 export const BoxSocial = styled.View`
     flex: 1.5;
     justify-content: center;
@@ -70,7 +69,7 @@ export const ButtonsContent = styled.View`
     width: 100%;
 `;
 
-export const BoxDivisor = styled.View`
+export const Wrapper = styled.View`
     flex: 1;
     flex-direction: row;
     justify-content: center;

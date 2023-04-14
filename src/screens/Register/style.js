@@ -8,17 +8,19 @@ export const Form = styled.View`
 export const Container = styled.View`
     flex-direction: ${(props) => (props.flexDirection ? "row" : "column")};
     width: ${(props) => (props.flexDirection ? "50%" : "100%")};
+    margin-right: ${(props) => (props.width ? "5px" : "0")};
 `;
 
 export const BoxIcon = styled.View`
     align-items: center;
     width: ${(props) => (props.width ? "30%" : "15%")};
+
 `;
 
 export const BoxInput = styled.View`
     flex-direction: row;
     align-items: center;
-    margin: 0 10px 5px 0;
+    margin-bottom: 5px;
     border-bottom-width: 1px;
     border-color: #CCCCCC;
     border-style: solid;

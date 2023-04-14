@@ -5,15 +5,15 @@ import { auth } from "../../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { 
-    BoxForm, 
-    BoxText, 
+    Form, 
+    BoxImage, 
     BoxSocial, 
     Container,
     TextInput,
     ButtonChangePass,
     BoxChangePass,
     ButtonAuth,
-    BoxDivisor,
+    Wrapper,
     ButtonsContent,
     SetPassword,
 } from "./style";
@@ -26,23 +26,20 @@ import facebookLogo from '../../assets/icons/facebook-logo.png';
 import googleLogo from '../../assets/icons/google-logo.png';
 import Feather from 'react-native-vector-icons/Feather';
 
+import { useError } from '../../utils/errors';
+
 export function Login({ navigation }){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassoword, setShowPassword] = useState(false);
-    const [error, setError] = useState(false);
-
-    //component will unmount in 5 seg
-    useEffect(()=> {
-        setTimeout(() => {
-            setError(false);
-        }, 5000);
-    }, [error]);
+    
+    const { error, errorMessage, handleError } = useError();
 
     const login = () => {
 
         if (email === '' || password === ''){
-            setError(true);
+            const err = 'Campo vazio';
+            handleError(err);
         }else{
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -51,9 +48,8 @@ export function Login({ navigation }){
             navigation.navigate("Tabs");
         })
             .catch((err) => {
-                setError(true);
-                const errorCode = err.code;
-                const errorMessage = err.message;
+                const errorMessage = err.code;
+                handleError(errorMessage);
             });
         }
     }
@@ -65,12 +61,13 @@ export function Login({ navigation }){
             console.log(error);
         });
     }
+
     return(
         <Container>
-            <BoxText>
+            <BoxImage>
                 <Image source={logo} style={{ resizeMode: 'center', height: 250 }} />
-            </BoxText>
-            <BoxForm>
+            </BoxImage>
+            <Form>
                 <TextInput 
                     placeholder="Digite seu E-mail"
                     type="text"
@@ -101,16 +98,18 @@ export function Login({ navigation }){
                 {
                     error === true
                     ?  
-                        <ErrorLogin text=' E-mail ou senha estão incorretos'/>
+                        <ErrorLogin text={errorMessage}/>
                     : 
                         <View style={{ height: 40 }}/>
                 }
-                <LoginBtn text='Fazer login' onPress={login}/>
-            </BoxForm>
+                <BoxChangePass>
+                    <LoginBtn text='Fazer login' onPress={login}/>
+                </BoxChangePass>
+            </Form>
             <BoxSocial>
-                <BoxDivisor>
+                <Wrapper>
                     <Text style={{ color: 'black' }}>Ou continue com</Text>
-                </BoxDivisor>
+                </Wrapper>
                 <ButtonsContent>
                     <ButtonAuth onPress={googleLogin}>
                         <Image source={googleLogo}/>
@@ -119,12 +118,12 @@ export function Login({ navigation }){
                         <Image source={facebookLogo}/>
                     </ButtonAuth>
                 </ButtonsContent>
-                <BoxDivisor>
+                <Wrapper>
                     <Text style={{ color: 'black' }}>Ainda nao é membro? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Register")}>
                         <Text style={{ color: '#6091cf' }}>Registre-se</Text>
                     </TouchableOpacity>
-                </BoxDivisor>
+                </Wrapper>
             </BoxSocial>
         </Container>
     )
