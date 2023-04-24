@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
+
 
 import { auth } from "../../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -34,6 +36,17 @@ export function Login({ navigation }){
     const [showPassoword, setShowPassword] = useState(false);
     
     const { error, errorMessage, handleError } = useError();
+    
+    useEffect(() => {
+        const checkUser = async () => {
+          const user = await AsyncStorage.getItem('user');
+          if (user) {
+            navigation.replace('Tabs');
+          }
+        };
+      
+        checkUser();
+      }, []);
 
     const login = () => {
 
@@ -45,7 +58,8 @@ export function Login({ navigation }){
             .then((userCredential) => {
     
             //const user = userCredential.user; userData
-            navigation.navigate("Tabs");
+            navigation.replace("Tabs");
+            AsyncStorage.setItem('user', JSON.stringify(userCredential.user));
         })
             .catch((err) => {
                 const errorMessage = err.code;

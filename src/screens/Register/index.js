@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 
-import { TextInputMask } from "react-native-masked-text"; 
+import { TextInputMask } from "react-native-masked-text";
 
 import { auth, db } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 
 import { 
-    BoxIcon, 
-    BoxInput, 
-    Container, 
+    BoxIcon,
+    BoxInput,
+    Container,
     Form,
     TextInput
 } 
@@ -53,7 +53,8 @@ export function Register(){
 
             const userData = {
                 username: userName,
-                fullName: firstname.concat(' ', lastName),
+                firstName: firstname,
+                lastName: lastName,
                 email: email,
                 phoneNumber: phoneNumer
             };
@@ -71,8 +72,6 @@ export function Register(){
             }
         }
     }
-    
-
 
     return(
         <View>
@@ -194,7 +193,7 @@ export function Register(){
                     ?
                         <ErrorLogin text={errorMessage}/>
                     :
-                        <View />                    
+                        <View />
                 }
             </Form>
         </View>
