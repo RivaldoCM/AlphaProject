@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export function Register(){
+export function Lists(){
     return(
         <View>
-            <Text>New User</Text>
+            <Text>Lists</Text>
         </View>
     )
 }
