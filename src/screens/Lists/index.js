@@ -36,8 +36,6 @@ export function Lists() {
                 <Text>{list.name}</Text>
                 <Feather name='arrow-down' size={25} />
               </HeadList>
-
-
               {isOpen ? (
                 <>
                   {list.items.map((item, itemIndex) => (
