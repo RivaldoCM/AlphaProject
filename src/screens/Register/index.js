@@ -20,7 +20,7 @@ import Icon from "react-native-vector-icons/Feather";
 import { LoginBtn } from "../../components/buttons";
 import { ErrorLogin } from "../../components/errors/ErrorLogin";
 
-import { useError } from '../../utils/errors';
+import { useError } from '../../hooks/useError';
 
 export function Register(){
 
@@ -55,15 +55,13 @@ export function Register(){
                 username: userName,
                 firstName: firstname,
                 lastName: lastName,
-                email: email,
                 phoneNumber: phoneNumer
             };
-                // Adiciona os dados do usuário na coleção "data"
-                await addDoc(dataCollectionRef, userData);
-                
-                console.log('Novas credenciais do usuário:', userCreds);
-                console.log('Usuário criado com sucesso:', userCreds.user.uid);
-                return userCreds;
+
+            // Adiciona os dados do usuário na coleção "data"
+            await addDoc(dataCollectionRef, userData);
+            return userCreds;
+
             } catch (err) {
                 console.log('Erro ao criar usuário:', err);
                 const errorMessage = err.code;

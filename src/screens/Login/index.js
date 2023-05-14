@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
 
-
 import { auth } from "../../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getIdTokenResult, signInWithEmailAndPassword } from "firebase/auth";
 
 import { 
     Form, 
@@ -28,7 +27,8 @@ import facebookLogo from '../../assets/icons/facebook-logo.png';
 import googleLogo from '../../assets/icons/google-logo.png';
 import Feather from 'react-native-vector-icons/Feather';
 
-import { useError } from '../../utils/errors';
+import { useError } from '../../hooks/useError';
+import { useAuth } from "../../hooks/useAuth";
 
 export function Login({ navigation }){
     const [email, setEmail] = useState('');
@@ -36,7 +36,8 @@ export function Login({ navigation }){
     const [showPassoword, setShowPassword] = useState(false);
     
     const { error, errorMessage, handleError } = useError();
-    
+    const { user, setUser } = useAuth();
+
     useEffect(() => {
         const checkUser = async () => {
           const user = await AsyncStorage.getItem('user');
@@ -44,9 +45,8 @@ export function Login({ navigation }){
             navigation.replace('Tabs');
           }
         };
-      
         checkUser();
-      }, []);
+    }, []);
 
     const login = () => {
 
@@ -60,6 +60,12 @@ export function Login({ navigation }){
             //const user = userCredential.user; userData
             navigation.replace("Tabs");
             AsyncStorage.setItem('user', JSON.stringify(userCredential.user));
+            
+            setUser({
+                id: userCredential.user.uid,
+                email: userCredential.user.email,
+                emailVerified: userCredential.user.emailVerified
+            });
         })
             .catch((err) => {
                 const errorMessage = err.code;
@@ -68,8 +74,12 @@ export function Login({ navigation }){
         }
     }
 
-    const googleLogin = () => {
-        firebase.auth().signInWithPopup(provider).then((result) => {
+    console.log(user);
+
+    const googleLogin = async () => {
+        const provider = new auth;
+
+        auth.signInWithPopup(provider).then((result) => {
             console.log(result);
         }).catch((error) => {
             console.log(error);
@@ -111,10 +121,8 @@ export function Login({ navigation }){
                 </BoxChangePass>
                 {
                     error === true
-                    ?  
-                        <ErrorLogin text={errorMessage}/>
-                    : 
-                        <View style={{ height: 40 }}/>
+                    ? <ErrorLogin text={errorMessage}/>
+                    : <View style={{ height: 40 }}/>
                 }
                 <BoxChangePass>
                     <LoginBtn text='Fazer login' onPress={login}/>
