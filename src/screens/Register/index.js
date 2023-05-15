@@ -47,9 +47,11 @@ export function Register(){
             //Cria um documento com ID do usuário
             const userDocRef = doc(userCollectionRef, userCreds.user.uid);
             
-            //Cria a subcoleção "data" onde vai ficar os dados do user
-            const dataCollectionRef = collection(userDocRef, 'data');
-            await setDoc(dataCollectionRef.parent, { 'data': true });
+            //Cria a subcoleção "profileData" onde vai ficar os dados do user
+            const dataCollectionRef = collection(userDocRef, 'profileData');
+            
+            //await setDoc(dataCollectionRef.parent, { 'data': true }); CASO QUEIRA, ADICIONA DADOS NO MESMO NIVEL DE profileData
+            //como documento, e nao como collection igual profileData
 
             const userData = {
                 username: userName,

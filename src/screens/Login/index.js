@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
 
-import { auth } from "../../config/firebase";
-import { getIdTokenResult, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, getDocs } from "firebase/firestore";
 
 import { 
     Form, 
@@ -38,7 +39,10 @@ export function Login({ navigation }){
     const { error, errorMessage, handleError } = useError();
     const { user, setUser } = useAuth();
 
+    const userCollectionRef = collection(db, 'users');
+
     useEffect(() => {
+
         const checkUser = async () => {
           const user = await AsyncStorage.getItem('user');
           if (user) {
@@ -46,35 +50,58 @@ export function Login({ navigation }){
           }
         };
         checkUser();
+
     }, []);
 
     const login = () => {
-
-        if (email === '' || password === ''){
-            const err = 'Campo vazio';
-            handleError(err);
-        }else{
-            signInWithEmailAndPassword(auth, email, password)
+        if (email === '' || password === '') {
+          const err = 'Campo vazio';
+          handleError(err);
+        } else {
+          signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-    
-            //const user = userCredential.user; userData
-            navigation.replace("Tabs");
-            AsyncStorage.setItem('user', JSON.stringify(userCredential.user));
-            
-            setUser({
-                id: userCredential.user.uid,
-                email: userCredential.user.email,
-                emailVerified: userCredential.user.emailVerified
-            });
-        })
+              //const user = userCredential.user; userData
+                navigation.replace("Tabs");
+                AsyncStorage.setItem('user', JSON.stringify(userCredential.user));
+              
+                const getUserProfileData = async (userId) => {
+                    const profileDataSnapshot = await getDocs(collection(doc(userCollectionRef, userId), 'data'));
+                    
+                    if (!profileDataSnapshot.empty) {
+                        const profileDataDoc = profileDataSnapshot.docs[0];
+                        const profileData = profileDataDoc.data();
+                        return profileData;
+                    }  else {
+                        console.log("Dados do perfil não encontrados");
+                    }
+                };
+      
+                const userProfileDataPromise = getUserProfileData(userCredential.user.uid);
+                userProfileDataPromise
+                    .then((profileData) => {
+                        if (profileData) {
+                            setUser({
+                                id: userCredential.user.uid,
+                                email: userCredential.user.email,
+                                emailVerified: userCredential.user.emailVerified,
+                                username: profileData.username,
+                                phoneNumber: profileData.phoneNumber,
+                                firstName: profileData.firstName
+                            })
+                        } else {
+                            console.log("Dados do perfil não encontrados");
+                        }
+                    })
+                    .catch((error) => {
+                        console.log("Erro ao obter dados do perfil:", error);
+                });
+            })
             .catch((err) => {
                 const errorMessage = err.code;
                 handleError(errorMessage);
             });
         }
-    }
-
-    console.log(user);
+    };
 
     const googleLogin = async () => {
         const provider = new auth;
@@ -150,4 +177,3 @@ export function Login({ navigation }){
         </Container>
     )
 }
-
